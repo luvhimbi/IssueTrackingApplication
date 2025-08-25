@@ -32,4 +32,5 @@ Designed for individuals to be able manage  issues efficiently, featuring a **Ji
 1. **Clone the repository**
 ```bash
 git clone https://github.com/luvhimbi/IssueTrackingApplication
-cd issue-tracking-system
+cd  IssueTrackingApplication
+
