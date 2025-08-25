@@ -26,8 +26,8 @@ class IssueController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'status' => 'required|in:open,in_progress,resolved,closed',
-            'priority' => 'required|in:low,medium,high,critical',
+            'status' => 'required|in:open,in_progress,resolved',
+            'priority' => 'required|in:low,medium,high',
         ]);
 
         Issue::create([
@@ -63,8 +63,8 @@ class IssueController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'status' => 'required|in:open,in_progress,resolved,closed',
-            'priority' => 'required|in:low,medium,high,critical',
+            'status' => 'required|in:open,in_progress,resolved',
+            'priority' => 'required|in:low,medium,high',
         ]);
 
         $issue->update($request->only('title', 'description', 'status', 'priority'));

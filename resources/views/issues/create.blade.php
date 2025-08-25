@@ -26,7 +26,6 @@
                 <option value="open">Open</option>
                 <option value="in_progress">In Progress</option>
                 <option value="resolved">Resolved</option>
-                <option value="closed">Closed</option>
             </select>
         </div>
         <div class="mb-3">
@@ -35,7 +34,6 @@
                 <option value="low">Low</option>
                 <option value="medium" selected>Medium</option>
                 <option value="high">High</option>
-                <option value="critical">Critical</option>
             </select>
         </div>
         <button type="submit" class="btn btn-success">Create</button>

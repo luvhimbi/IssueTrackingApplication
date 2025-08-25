@@ -23,7 +23,7 @@
         <div class="mb-3">
             <label>Status</label>
             <select name="status" class="form-select">
-                @foreach(['open','in_progress','resolved','closed'] as $status)
+                @foreach(['open','in_progress','resolved'] as $status)
                     <option value="{{ $status }}" {{ $issue->status == $status ? 'selected' : '' }}>{{ ucfirst($status) }}</option>
                 @endforeach
             </select>
@@ -31,7 +31,7 @@
         <div class="mb-3">
             <label>Priority</label>
             <select name="priority" class="form-select">
-                @foreach(['low','medium','high','critical'] as $priority)
+                @foreach(['low','medium','high'] as $priority)
                     <option value="{{ $priority }}" {{ $issue->priority == $priority ? 'selected' : '' }}>{{ ucfirst($priority) }}</option>
                 @endforeach
             </select>
