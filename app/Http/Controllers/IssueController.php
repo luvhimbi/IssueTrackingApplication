@@ -87,4 +87,15 @@ class IssueController extends Controller
             abort(403, 'Unauthorized action.');
         }
     }
+    public function updateStatus(Request $request, Issue $issue)
+    {
+        $request->validate([
+            'status' => 'required|in:open,in_progress,resolved,closed',
+        ]);
+
+        $issue->update(['status' => $request->status]);
+
+        return response()->json(['message' => 'Status updated successfully.']);
+    }
+
 }

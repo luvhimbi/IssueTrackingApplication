@@ -16,11 +16,11 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Protected route for dashboard
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [IssueController::class, 'index'])->name('dashboard');
+    Route::patch('/issues/{issue}/status', [IssueController::class, 'updateStatus'])
+        ->name('issues.updateStatus');
+
     Route::resource('issues', IssueController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
