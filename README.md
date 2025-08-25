@@ -20,9 +20,9 @@ Designed for individuals to be able manage  issues efficiently, featuring a **Ji
 
 ## Technologies Used
 
-- **Backend:** Laravel 10  
+- **Backend:** Laravel 12  
 - **Frontend:** Bootstrap 5 (Bootswatch Lux), Poppins Font, SweetAlert2, SortableJS  
-- **Database:** MySQL / PostgreSQL  
+- **Database:** PostgreSQL  
 - **Icons:** Bootstrap Icons  
 
 ---
@@ -33,4 +33,5 @@ Designed for individuals to be able manage  issues efficiently, featuring a **Ji
 ```bash
 git clone https://github.com/luvhimbi/IssueTrackingApplication
 cd  IssueTrackingApplication
+
 
