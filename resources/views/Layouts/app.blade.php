@@ -37,6 +37,9 @@
                         <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile.edit') }}">Profile</a>
+                    </li>
+                    <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-link nav-link" style="display:inline;cursor:pointer;">
