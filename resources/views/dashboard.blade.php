@@ -9,23 +9,43 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Your Issues</h3>
+    <div class="d-flex justify-content-between align-items-center mt-5">
+        <h3>Track Your Issues</h3>
         <a href="{{ route('issues.create') }}" class="btn btn-primary">
             <i class="bi bi-plus-circle me-1"></i> Create Issue
         </a>
     </div>
 
+    {{-- Filters --}}
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <select id="filterStatus" class="form-select">
+                <option value="">-- Filter by Status --</option>
+                <option value="open">Open</option>
+                <option value="in_progress">In Progress</option>
+                <option value="resolved">Resolved</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select id="filterPriority" class="form-select">
+                <option value="">-- Filter by Priority --</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+    </div>
+
     {{-- Kanban Board --}}
     <div class="row" id="kanban-board">
         @php
-            $statuses = ['open' => 'Open', 'in_progress' => 'In Progress', 'resolved' => 'Resolved', 'closed' => 'Closed'];
-            $priorityColors = ['low' => 'border-success', 'medium' => 'border-warning', 'high' => 'border-danger', 'critical' => 'border-danger'];
-            $statusColors = ['open' => 'bg-primary', 'in_progress' => 'bg-info', 'resolved' => 'bg-success', 'closed' => 'bg-secondary'];
+            $statuses = ['open' => 'Open', 'in_progress' => 'In Progress', 'resolved' => 'Resolved'];
+            $priorityColors = ['low' => 'border-success', 'medium' => 'border-warning', 'high' => 'border-danger'];
+            $statusColors = ['open' => 'bg-primary', 'in_progress' => 'bg-info', 'resolved' => 'bg-success'];
         @endphp
 
         @foreach($statuses as $key => $label)
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
                 <div class="card shadow">
                     <div class="card-header text-white text-center fw-bold {{ $statusColors[$key] }}">
                         {{ $label }}
@@ -36,6 +56,8 @@
                         @foreach($issues->where('status', $key) as $issue)
                             <div class="card mb-3 draggable-issue shadow-sm {{ $priorityColors[$issue->priority] ?? 'border-secondary' }}"
                                  data-id="{{ $issue->id }}"
+                                 data-status="{{ $issue->status }}"
+                                 data-priority="{{ $issue->priority }}"
                                  draggable="true"
                                  style="border-width: 2px; cursor: grab;">
                                 <div class="card-body p-2 d-flex justify-content-between align-items-start">
@@ -128,6 +150,30 @@
                     deleteForm.action = `/issues/${issueId}`;
                 });
             });
+
+            // Filters
+            const filterStatus = document.getElementById('filterStatus');
+            const filterPriority = document.getElementById('filterPriority');
+
+            function applyFilters() {
+                const statusVal = filterStatus.value;
+                const priorityVal = filterPriority.value;
+
+                document.querySelectorAll('.draggable-issue').forEach(card => {
+                    const cardStatus = card.dataset.status;
+                    const cardPriority = card.dataset.priority;
+
+                    let show = true;
+
+                    if (statusVal && cardStatus !== statusVal) show = false;
+                    if (priorityVal && cardPriority !== priorityVal) show = false;
+
+                    card.style.display = show ? 'block' : 'none';
+                });
+            }
+
+            filterStatus.addEventListener('change', applyFilters);
+            filterPriority.addEventListener('change', applyFilters);
 
         });
     </script>
